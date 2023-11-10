@@ -8,8 +8,11 @@ import {
 import { Input, Textarea } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
+import { Spinner } from "@nextui-org/spinner";
 import { Controller, useForm } from "react-hook-form";
 import { currencyOptions } from "./constants";
+import clsx from "clsx";
+import { useFormState } from "@/hooks/useFormState";
 
 export interface PaymentDialogBoxProps {
   isOpen: boolean;
@@ -23,6 +26,13 @@ interface PaymentForm {
   description?: string;
 }
 
+const defaultValues = {
+  toPerson: "",
+  currency: "INR",
+  amount: "",
+  description: "",
+};
+
 const PaymentDialogBox = ({ isOpen, onClose }: PaymentDialogBoxProps) => {
   const {
     watch,
@@ -33,25 +43,77 @@ const PaymentDialogBox = ({ isOpen, onClose }: PaymentDialogBoxProps) => {
     formState: { isValid },
   } = useForm<PaymentForm>({
     mode: "onChange",
-    defaultValues: {
-      toPerson: "",
-      currency: "INR",
-      amount: "",
-      description: "",
-    },
+    defaultValues,
   });
+  const {
+    message,
+    isLoading,
+    isSuccess,
+    isError,
+    resetFormState,
+    setLoading,
+    setSuccess,
+    setError,
+  } = useFormState();
 
   const selectedCurrency = watch("currency");
 
-  const onSubmit = (data: PaymentForm) => {
-    console.log(data);
+  const onSubmit = async (data: PaymentForm) => {
+    try {
+      setLoading();
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        setSuccess("Payment done successfully.");
+        reset(defaultValues);
+      } else if (response.status === 400) {
+        setError("Bad Request: Invalid request.");
+      } else if (response.status === 401) {
+        setError("Unauthorized: No Permission.");
+      } else if (response.status === 503) {
+        setError(
+          "Some error: We are facing some error processing payment now."
+        );
+      } else {
+        setError("Unknown error");
+      }
+    } catch (e) {
+      setError("Unknown error");
+    }
+  };
+  const handleClose = () => {
+    reset(defaultValues);
+    resetFormState();
+    onClose();
   };
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isDismissable={false}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      isDismissable={false}
+      hideCloseButton={true}
+    >
       <ModalContent className="px-2">
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <ModalHeader className="flex flex-col">Make payment</ModalHeader>
           <ModalBody className="flex flex-col gap-6">
+            <p
+              role="form-info"
+              className={clsx(
+                "text-sm",
+                isSuccess && "text-success",
+                isError && "text-danger"
+              )}
+            >
+              {message}
+            </p>
             <Controller
               control={control}
               name="toPerson"
@@ -149,14 +211,23 @@ const PaymentDialogBox = ({ isOpen, onClose }: PaymentDialogBoxProps) => {
             />
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" variant="light" onPress={onClose}>
+            <Button color="danger" variant="light" onPress={handleClose}>
               Cancel
             </Button>
-            <Button type="submit" color="primary" isDisabled={!isValid}>
+            <Button
+              type="submit"
+              color="primary"
+              isDisabled={!isValid || isLoading}
+            >
               Checkout
             </Button>
           </ModalFooter>
         </form>
+        {isLoading ? (
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Spinner />
+          </div>
+        ) : null}
       </ModalContent>
     </Modal>
   );
