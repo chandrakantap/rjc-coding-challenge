@@ -6,6 +6,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [react-hook-form](https://www.react-hook-form.com/) - form utility
 - [Playwright](https://playwright.dev/) - Automated testing framwork
 
+### -
+
+[![Node.js CI](https://github.com/chandrakantap/rjc-coding-challenge/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/chandrakantap/rjc-coding-challenge/actions/workflows/node.js.yml)
+
+### -
+
 ### Running in local
 
 - run `yarn` to install the dependecies.
