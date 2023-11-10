@@ -13,7 +13,14 @@
     "test:ui": " playwright test --ui"
   },
   "dependencies": {
-    "next": "14.0.2",
+    "@nextui-org/button": "^2.0.25",
+    "@nextui-org/input": "^2.1.16",
+    "@nextui-org/modal": "^2.0.27",
+    "@nextui-org/select": "^2.1.19",
+    "@nextui-org/system": "^2.0.14",
+    "@nextui-org/theme": "^2.1.16",
+    "framer-motion": "^10.16.4",
+    "next": "^14.0.2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2"
