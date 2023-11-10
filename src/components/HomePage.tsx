@@ -26,6 +26,23 @@ export default function HomePage() {
           </p>
         </button>
       </div>
+
+      <div className="text-sm bg-gray-200 p-10 rounded-md">
+        <h3 className="text-lg">Test data:</h3>
+        <p className="mb-4">
+          To simulate different scenarion use appropriate email in{" "}
+          <span className="text-danger px-2  bg-gray-200 border  border-gray-300 rounded-sm">
+            To
+          </span>{" "}
+          field, as below:
+        </p>
+        <ul>
+          <li>400 - Bad Request: bademail@email.com</li>
+          <li>401 - Unauthorized: unauthorized@email.com</li>
+          <li>5XX - Server Error: 5xx@email.com</li>
+          <li>Success - any other email</li>
+        </ul>
+      </div>
       <PaymentDialogBox isOpen={isOpen} onClose={closeModal} />
     </main>
   );

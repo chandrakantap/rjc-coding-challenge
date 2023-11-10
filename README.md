@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), and using below libraries:
 
-## Getting Started
+- Typescript
+- [TailwindCSS](https://tailwindcss.com/)
+- [NextUI](https://nextui.org/)
+- [react-hook-form](https://www.react-hook-form.com/) - form utility
+- [Playwright](https://playwright.dev/) - Automated testing framwork
 
-First, run the development server:
+### Running in local
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- run `yarn` to install the dependecies.
+- run `yarn test:init` for postinstall initialization
+- run `yarn dev` for starting app in local server.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Automated test case
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This application using [Playwright](https://playwright.dev/) for autmated writing automated test case.
 
-## Learn More
+`yarn test:init` needs to run before executing any test case.
 
-To learn more about Next.js, take a look at the following resources:
+To execute test case, run `yarn test`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### With more time
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- I would try to integrate the for with a payment gateway sandbox, like paypal etc.
+- We could integrate with publick api for currency conversion.
 
-## Deploy on Vercel
+### Assumptions
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- User will submit exact USD and INR value in form and currency conversion is required.
+- Tried to make the app responsive.
