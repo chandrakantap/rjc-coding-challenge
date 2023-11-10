@@ -26,6 +26,7 @@ To execute test case, run `yarn test`
 
 - I would try to integrate the for with a payment gateway sandbox, like paypal etc.
 - We could integrate with publick api for currency conversion.
+- Will try to create a github-action to run the automated testcase.
 
 ### Assumptions
 
