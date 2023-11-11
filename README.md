@@ -10,7 +10,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Live Demo
 
-Live demo available at [here](https://rjc-coding-challenge-7d6qghygv-chandrakanta-pals-projects.vercel.app/)
+Live demo available at [https://rjc-coding-challenge.vercel.app/](https://rjc-coding-challenge.vercel.app/)
 
 ### Running in local
 
@@ -22,7 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Automated test case
 
-This application using [Playwright](https://playwright.dev/) for autmated writing automated test case.
+This application using [Playwright](https://playwright.dev/) for writing automated test case.
 
 `yarn test:init` needs to run before executing any test case.
 
@@ -30,8 +30,8 @@ To execute test case, run `yarn test`
 
 ### With more time
 
-- I would try to integrate the for with a payment gateway sandbox, like paypal etc.
-- We could integrate with publick api for currency conversion.
+- I would try to integrate the app for payment with a payment gateway sandbox, like paypal etc.
+- We could integrate with public api for currency conversion.
 - Will try to create a github-action to run the automated testcase.
 
 ### Assumptions
